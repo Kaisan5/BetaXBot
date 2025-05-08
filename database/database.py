@@ -58,3 +58,24 @@ async def full_userbase():
 async def del_user(user_id: int):
     await user_data.delete_one({'_id': user_id})
     return
+
+
+
+
+class Stelleron:
+
+    def __init__(self, DB_URI, DB_NAME):
+        self.dbclient = motor.motor_asyncio.AsyncIOMotorClient(DB_URI)
+        self.database = self.dbclient[DB_NAME]
+
+        self.channel_data = self.database['channels']
+        self.admins_data = self.database['admins']
+        self.user_data = self.database['users']
+        self.sex_data = self.database['sex']
+        self.banned_user_data = self.database['banned_user']
+        self.autho_user_data = self.database['autho_user']
+        self.del_timer_data = self.database['del_timer']
+        self.fsub_data = self.database['fsub']   
+        self.rqst_fsub_data = self.database['request_forcesub']
+        self.rqst_fsub_Channel_data = self.database['request_forcesub_channel']
+        
