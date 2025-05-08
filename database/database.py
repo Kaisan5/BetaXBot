@@ -31,7 +31,7 @@ def new_user(id):
             'link': ""
         }
     }
-
+#userdata
 async def present_user(user_id: int):
     found = await user_data.find_one({'_id': user_id})
     return bool(found)
@@ -39,6 +39,15 @@ async def present_user(user_id: int):
 async def add_user(user_id: int):
     user = new_user(user_id)
     await user_data.insert_one(user)
+    return
+
+async def full_userbase(self):
+        user_docs = await self.user_data.find().to_list(length=None)
+        user_ids = [doc['_id'] for doc in user_docs]
+        return user_ids
+
+async def del_user(self, user_id: int):
+    await self.user_data.delete_one({'_id': user_id})
     return
 
 async def db_verify_status(user_id):
